@@ -1,0 +1,41 @@
+[
+  {
+    "id": "digestive_game",
+    "title": "人體消化大冒險 (54格完備版)",
+    "category": "digestive",
+    "badgeText": "熱門登場",
+    "badgeColor": "#27ae60",
+    "icon": "💩",
+    "description": "54格地圖探索口腔、胃液、膽汁乳化與小腸絨毛吸收，內建 36 題消化系統專屬題庫，完成獲得防偽驗證碼！",
+    "tags": ["🧬 消化系統專屬題庫", "📊 GC 截圖繳交", "📱 RWD響應式"],
+    "btnText": "🚀 直接進入遊戲",
+    "btnColor": "#27ae60",
+    "url": "https://zeroseven-hue.github.io/bio-digestive-game/"
+  },
+  {
+    "id": "circulatory_preview",
+    "title": "心血管與血液循環大冒險",
+    "category": "circulatory",
+    "badgeText": "單元預告",
+    "badgeColor": "#0284c7",
+    "icon": "🫀",
+    "description": "探索心臟四腔室、體循環與肺循環路徑，包含血管氣體交換與血球功能專屬題庫！",
+    "tags": ["🩸 循環系統專屬題庫", "🫀 心臟剖面圖解", "⌛ 即將登場"],
+    "btnText": "⌛ 預計近期上線",
+    "btnColor": "#94a3b8",
+    "url": "#"
+  },
+  {
+    "id": "nervous_preview",
+    "title": "神經與感應控制大闖關",
+    "category": "nervous",
+    "badgeText": "單元預告",
+    "badgeColor": "#7c3aed",
+    "icon": "🧠",
+    "description": "探索反射弧動態傳導、腦幹與小腦分工、植物向性與內分泌調節專屬題庫！",
+    "tags": ["⚡ 神經反射弧", "🌿 植物向性", "⌛ 即將登場"],
+    "btnText": "⌛ 預計近期上線",
+    "btnColor": "#94a3b8",
+    "url": "#"
+  }
+]

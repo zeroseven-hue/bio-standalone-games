@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>國中生物獨立單元遊戲大廳 bio-standalone-games</title>
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-hover: #047857;
+            --bg-color: #f0fdf4;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --accent-blue: #0284c7;
+            --accent-purple: #7c3aed;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px 15px 40px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1120px;
+        }
+
+        /* 平台頂部標題與說明 */
+        .hero {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 10px 0;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #065f46;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 0 0 10px 0;
+        }
+
+        .badge-code {
+            background: #d1fae5;
+            color: #047857;
+            font-family: monospace;
+            font-size: 18px;
+            padding: 2px 10px;
+            border-radius: 8px;
+            border: 1px solid #6ee7b7;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 780px;
+            margin: 0 auto 18px auto;
+            line-height: 1.6;
+        }
+
+        /* 頂端功能按鈕 */
+        .top-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.35);
+        }
+
+        .switch-btn {
+            background: #475569;
+            box-shadow: 0 4px 12px rgba(71, 85, 105, 0.25);
+        }
+
+        .switch-btn:hover {
+            background: #334155;
+            box-shadow: 0 6px 16px rgba(71, 85, 105, 0.35);
+        }
+
+        /* 大廳區塊 */
+        .hall-header {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .hall-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+
+        /* 卡片網格 Layout */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 22px;
+            width: 100%;
+        }
+
+        /* 卡片主體 */
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 0 0 10px 0;
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.55;
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        .tag-pill {
+            background: #ecfdf5;
+            color: #047857;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 9px;
+            border-radius: 8px;
+            border: 1px solid #a7f3d0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .play-btn {
+            width: 100%;
+            padding: 12px;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+        }
+
+        .play-btn:hover {
+            opacity: 0.92;
+            transform: scale(1.01);
+        }
+
+        .play-btn.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* 計時器彈窗 Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: white;
+            border-radius: 24px;
+            padding: 28px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .timer-display {
+            font-size: 54px;
+            font-weight: 900;
+            font-family: monospace;
+            color: var(--text-dark);
+            margin: 15px 0;
+            letter-spacing: 2px;
+        }
+
+        .timer-presets {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .preset-btn {
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 8px 4px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .preset-btn:hover { background: #e2e8f0; }
+
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .t-btn {
+            flex: 1;
+            padding: 11px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .t-btn-start { background: var(--primary); color: white; }
+        .t-btn-pause { background: #f59e0b; color: white; }
+        .t-btn-reset { background: #94a3b8; color: white; }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 平台 Header -->
+        <header class="hero">
+            <h1 class="hero-title">
+                <span>🧬 國中生物獨立單元遊戲大廳</span>
+                <span class="badge-code">bio-standalone-games</span>
+            </h1>
+            <div class="hero-subtitle">
+                專屬單元獨立題庫 · 深度主題闖關遊戲 · 支援 iPad 觸控與 Google Classroom 作業繳交
+            </div>
+            <div class="top-actions">
+                <a class="action-btn switch-btn" href="https://zeroseven-hue.github.io/bio-games/">👉 切換至【共用題庫遊戲大廳】</a>
+                <button class="action-btn" onclick="openTimerModal()">⏱️ 課堂專注計時器</button>
+            </div>
+        </header>
+
+        <!-- 遊戲大廳區塊 -->
+        <section class="hall-header">
+            <h2 class="hall-title">🎮 獨立題庫專屬遊戲大廳 (單元主題·自訂題庫)</h2>
+        </section>
+
+        <!-- 卡片網格 Container -->
+        <main class="cards-grid" id="cards-container"></main>
+
+        <footer>
+            © 2026 國中生物獨立單元遊戲大廳 bio-standalone-games · 專為國中 7-8 年級生物教學打造
+        </footer>
+    </div>
+
+    <!-- 課堂計時器 Modal -->
+    <div class="modal" id="timer-modal">
+        <div class="modal-card">
+            <h3 style="margin-top:0; color:var(--text-dark);">⏱️ 課堂專注計時器</h3>
+            <div class="timer-display" id="timer-text">03:00</div>
+            
+            <div class="timer-presets">
+                <button class="preset-btn" onclick="setTimerSeconds(60)">1 分鐘</button>
+                <button class="preset-btn" onclick="setTimerSeconds(180)">3 分鐘</button>
+                <button class="preset-btn" onclick="setTimerSeconds(300)">5 分鐘</button>
+                <button class="preset-btn" onclick="setTimerSeconds(600)">10 分鐘</button>
+            </div>
+
+            <div class="timer-controls">
+                <button class="t-btn t-btn-start" id="t-toggle-btn" onclick="toggleTimer()">🚀 開始</button>
+                <button class="t-btn t-btn-reset" onclick="resetTimer()">🔄 重置</button>
+                <button class="t-btn" style="background:#e2e8f0; color:#475569;" onclick="closeTimerModal()">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fallbackGames = [
+            {
+                "id": "digestive_game",
+                "title": "人體消化大冒險 (54格完備版)",
+                "category": "digestive",
+                "badgeText": "熱門登場",
+                "badgeColor": "#27ae60",
+                "icon": "💩",
+                "description": "54格地圖探索口腔、胃液、膽汁乳化與小腸絨毛吸收，內建 36 題消化系統專屬題庫，完成獲得防偽驗證碼！",
+                "tags": ["🧬 消化系統專屬題庫", "📊 GC 截圖繳交", "📱 RWD響應式"],
+                "btnText": "🚀 直接進入遊戲",
+                "btnColor": "#27ae60",
+                "url": "https://zeroseven-hue.github.io/bio-digestive-game/"
+            },
+            {
+                "id": "circulatory_preview",
+                "title": "心血管與血液循環大冒險",
+                "category": "circulatory",
+                "badgeText": "單元預告",
+                "badgeColor": "#0284c7",
+                "icon": "🫀",
+                "description": "探索心臟四腔室、體循環與肺循環路徑，包含血管氣體交換與血球功能專屬題庫！",
+                "tags": ["🩸 循環系統專屬題庫", "🫀 心臟剖面圖解", "⌛ 即將登場"],
+                "btnText": "⌛ 預計近期上線",
+                "btnColor": "#94a3b8",
+                "url": "#"
+            },
+            {
+                "id": "nervous_preview",
+                "title": "神經與感應控制大闖關",
+                "category": "nervous",
+                "badgeText": "單元預告",
+                "badgeColor": "#7c3aed",
+                "icon": "🧠",
+                "description": "探索反射弧動態傳導、腦幹與小腦分工、植物向性與內分泌調節專屬題庫！",
+                "tags": ["⚡ 神經反射弧", "🌿 植物向性", "⌛ 即將登場"],
+                "btnText": "⌛ 預計近期上線",
+                "btnColor": "#94a3b8",
+                "url": "#"
+            }
+        ];
+
+        let allGamesData = [];
+
+        async function loadGames() {
+            try {
+                let res = await fetch('games.json');
+                if (res.ok) {
+                    allGamesData = await res.json();
+                } else {
+                    throw new Error("HTTP load error");
+                }
+            } catch (e) {
+                console.log("使用內嵌備用遊戲清單");
+                allGamesData = fallbackGames;
+            }
+            renderGames();
+        }
+
+        function renderGames() {
+            const container = document.getElementById('cards-container');
+            container.innerHTML = '';
+
+            allGamesData.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+
+                const tagsHtml = game.tags.map(t => `<span class="tag-pill">${t}</span>`).join('');
+                const isDisabled = game.url === '#';
+
+                card.innerHTML = `
+                    <div class="card-badge" style="background-color: ${game.badgeColor}">${game.badgeText}</div>
+                    <div class="card-icon">${game.icon}</div>
+                    <h3 class="card-title">${game.title}</h3>
+                    <div class="card-desc">${game.description}</div>
+                    <div class="card-tags">${tagsHtml}</div>
+                    <a class="play-btn ${isDisabled ? 'disabled' : ''}" href="${game.url}" style="background-color: ${game.btnColor}">${game.btnText}</a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        /* --- 課堂計時器邏輯 --- */
+        let timerSeconds = 180;
+        let timerInterval = null;
+        let isTimerRunning = false;
+        let audioCtx = null;
+
+        function updateTimerDisplay() {
+            const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+            const s = (timerSeconds % 60).toString().padStart(2, '0');
+            document.getElementById('timer-text').innerText = `${m}:${s}`;
+        }
+
+        function setTimerSeconds(sec) {
+            pauseTimer();
+            timerSeconds = sec;
+            updateTimerDisplay();
+        }
+
+        function toggleTimer() {
+            if (isTimerRunning) pauseTimer();
+            else startTimer();
+        }
+
+        function startTimer() {
+            isTimerRunning = true;
+            document.getElementById('t-toggle-btn').innerText = "⏸️ 暫停";
+            document.getElementById('t-toggle-btn').className = "t-btn t-btn-pause";
+
+            timerInterval = setInterval(() => {
+                if (timerSeconds > 0) {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                } else {
+                    pauseTimer();
+                    playAlarmTone();
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            isTimerRunning = false;
+            clearInterval(timerInterval);
+            document.getElementById('t-toggle-btn').innerText = "🚀 開始";
+            document.getElementById('t-toggle-btn').className = "t-btn t-btn-start";
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timerSeconds = 180;
+            updateTimerDisplay();
+        }
+
+        function playAlarmTone() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            try {
+                let osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.frequency.value = 880;
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                osc.start(); osc.stop(audioCtx.currentTime + 1.0);
+            } catch(e){}
+        }
+
+        function openTimerModal() { document.getElementById('timer-modal').style.display = 'flex'; }
+        function closeTimerModal() { document.getElementById('timer-modal').style.display = 'none'; }
+
+        loadGames();
+    </script>
+</body>
+</html>
