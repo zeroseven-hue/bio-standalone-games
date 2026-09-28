@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>國中生物獨立單元遊戲大廳 bio-standalone-games</title>
+    <!-- QRCode.js CDN for QR Code Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
             --primary: #059669;
@@ -229,6 +231,173 @@
             transform: scale(1.01);
         }
 
+        /* 👨‍🏫 教師派發面板樣式 */
+        .dispatch-section {
+            margin-top: 40px;
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .dispatch-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 0 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dispatch-subtitle {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin: 0 0 20px 0;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .styled-select, .styled-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            background-color: #f8fafc;
+            transition: border-color 0.2s;
+        }
+
+        .styled-select:focus, .styled-input:focus {
+            border-color: var(--primary);
+            background-color: #fff;
+        }
+
+        .checkbox-group {
+            justify-content: center;
+        }
+
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+            font-size: 14px;
+        }
+
+        .dispatch-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-dispatch {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            font-size: 15px;
+            font-weight: 800;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+        }
+
+        .btn-dispatch:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #475569;
+            box-shadow: 0 4px 12px rgba(71, 85, 105, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: #334155;
+        }
+
+        .qr-result-area {
+            margin-top: 24px;
+            padding: 20px;
+            background: #f0fdf4;
+            border: 1.5px dashed #6ee7b7;
+            border-radius: 16px;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .qr-result-area.hidden { display: none; }
+
+        .qr-code-box {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .qr-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin: 8px 0 0 0;
+            font-weight: 600;
+        }
+
+        .url-box {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .url-box input {
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .btn-launch-link {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: white;
+            text-align: center;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-launch-link:hover { background: #0369a1; }
+
         /* 計時器彈窗 Modal */
         .modal {
             position: fixed;
@@ -321,8 +490,8 @@
                 專屬單元獨立題庫 · 深度主題闖關遊戲 · 支援 iPad 觸控與 Google Classroom 作業繳交
             </div>
             <div class="top-actions">
-                <button class="action-btn" onclick="openTimerModal()">⏱️ 課堂專注計時器</button>
                 <a class="action-btn switch-btn" href="https://zeroseven-hue.github.io/bio-games/">👉 切換至【共用題庫遊戲大廳】</a>
+                <button class="action-btn" onclick="openTimerModal()">⏱️ 課堂專注計時器</button>
             </div>
         </header>
 
@@ -333,6 +502,61 @@
 
         <!-- 卡片網格 Container -->
         <main class="cards-grid" id="cards-container"></main>
+
+        <!-- 👨‍🏫 教師派發與 QR Code 產生器面板 -->
+        <section class="dispatch-section">
+            <h2 class="dispatch-title">👨‍🏫 教師一鍵課堂派發與 QR Code 產生器</h2>
+            <p class="dispatch-subtitle">選擇獨立單元遊戲與遊玩模式，自動生成二維碼供學生使用 iPad / 手機掃碼直接進入對應挑戰！</p>
+
+            <div class="dispatch-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="selectGame">1. 選擇獨立遊戲：</label>
+                        <select id="selectGame" class="styled-select">
+                            <option value="https://zeroseven-hue.github.io/bio-digestive-game/">💩 人體消化大冒險 (54格完備版)</option>
+                            <option value="https://zeroseven-hue.github.io/boba-reaction-game/">🧋 珍珠奶茶大對決 (喝光奶茶擂台版)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selectMode">2. 遊玩模式：</label>
+                        <select id="selectMode" class="styled-select">
+                            <option value="solo">🧑‍🚀 個人單機自主挑戰</option>
+                            <option value="group-tablet">👥 各組平板輪流競賽</option>
+                            <option value="projector">🖥️ 全班大螢幕投影主持</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group checkbox-group">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="checkTimerOff">
+                            <strong>🧩 特教友善模式 (`timer=off`)</strong>
+                        </label>
+                        <small style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">取消答題時間限制，適合資源班及需無壓力思考的學生。</small>
+                    </div>
+                </div>
+
+                <div class="dispatch-buttons">
+                    <button id="btnGenerateQR" class="btn-dispatch" onclick="generateQRCode()">📱 生成派發 QR Code 與網址</button>
+                    <button id="btnCopyUrl" class="btn-dispatch btn-secondary" onclick="copyDispatchUrl()">🔗 複製派發網址</button>
+                </div>
+
+                <!-- QR Code 與網址顯示區 -->
+                <div id="qrResultArea" class="qr-result-area hidden">
+                    <div class="qr-code-box">
+                        <div id="qrcode"></div>
+                        <p class="qr-hint">請學生開啟相機或掃描器對準二維碼即可開始</p>
+                    </div>
+                    <div class="url-box">
+                        <label style="font-weight: 700; font-size: 13px;">派發網址：</label>
+                        <input type="text" id="generatedUrlInput" class="styled-input" readonly>
+                        <a id="btnDirectLaunch" href="#" target="_blank" class="btn-launch-link">🚀 以此設定開啟遊戲</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <footer>
             © 2026 國中生物獨立單元遊戲大廳 bio-standalone-games · 專為國中 7-8 年級生物教學打造
@@ -426,6 +650,52 @@
                     <a class="play-btn" href="${game.url}" style="background-color: ${game.btnColor}">${game.btnText}</a>
                 `;
                 container.appendChild(card);
+            });
+        }
+
+        /* --- 教師派發 & QR Code 邏輯 --- */
+        let qrcodeObj = null;
+
+        function buildDispatchUrl() {
+            const gameUrl = document.getElementById('selectGame').value;
+            const mode = document.getElementById('selectMode').value;
+            const isTimerOff = document.getElementById('checkTimerOff').checked;
+
+            let url = new URL(gameUrl);
+            if (mode) url.searchParams.set('mode', mode);
+            if (isTimerOff) url.searchParams.set('timer', 'off');
+            return url.toString();
+        }
+
+        function generateQRCode() {
+            const finalUrl = buildDispatchUrl();
+            const qrResultArea = document.getElementById('qrResultArea');
+            const qrcodeContainer = document.getElementById('qrcode');
+            const urlInput = document.getElementById('generatedUrlInput');
+            const directLaunchBtn = document.getElementById('btnDirectLaunch');
+
+            qrcodeContainer.innerHTML = '';
+            qrResultArea.classList.remove('hidden');
+
+            qrcodeObj = new QRCode(qrcodeContainer, {
+                text: finalUrl,
+                width: 140,
+                height: 140,
+                colorDark : "#065f46",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            urlInput.value = finalUrl;
+            directLaunchBtn.href = finalUrl;
+        }
+
+        function copyDispatchUrl() {
+            const finalUrl = buildDispatchUrl();
+            navigator.clipboard.writeText(finalUrl).then(() => {
+                alert("✅ 派發網址已成功複製到剪貼簿！\n\n" + finalUrl);
+            }).catch(() => {
+                prompt("請手動複製以下派發網址：", finalUrl);
             });
         }
 
