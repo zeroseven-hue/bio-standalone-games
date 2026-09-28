@@ -75,7 +75,8 @@
         .top-actions {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            align-items: center;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
@@ -228,11 +229,6 @@
             transform: scale(1.01);
         }
 
-        .play-btn.disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
         /* 計時器彈窗 Modal */
         .modal {
             position: fixed;
@@ -326,6 +322,7 @@
             </div>
             <div class="top-actions">
                 <button class="action-btn" onclick="openTimerModal()">⏱️ 課堂專注計時器</button>
+                <a class="action-btn switch-btn" href="https://zeroseven-hue.github.io/bio-games/">👉 切換至【共用題庫遊戲大廳】</a>
             </div>
         </header>
 
@@ -390,19 +387,6 @@
                 "btnText": "🚀 直接進入遊戲",
                 "btnColor": "#e74c3c",
                 "url": "https://zeroseven-hue.github.io/boba-reaction-game/"
-            },
-            {
-                "id": "circulatory_preview",
-                "title": "心血管與血液循環大冒險",
-                "category": "circulatory",
-                "badgeText": "單元預告",
-                "badgeColor": "#0284c7",
-                "icon": "🫀",
-                "description": "探索心臟四腔室、體循環與肺循環路徑，包含血管氣體交換與血球功能專屬題庫！",
-                "tags": ["🩸 循環系統專屬題庫", "🫀 心臟剖面圖解", "⌛ 即將登場"],
-                "btnText": "⌛ 預計近期上線",
-                "btnColor": "#94a3b8",
-                "url": "#"
             }
         ];
 
@@ -432,7 +416,6 @@
                 card.className = 'game-card';
 
                 const tagsHtml = game.tags.map(t => `<span class="tag-pill">${t}</span>`).join('');
-                const isDisabled = game.url === '#';
 
                 card.innerHTML = `
                     <div class="card-badge" style="background-color: ${game.badgeColor}">${game.badgeText}</div>
@@ -440,7 +423,7 @@
                     <h3 class="card-title">${game.title}</h3>
                     <div class="card-desc">${game.description}</div>
                     <div class="card-tags">${tagsHtml}</div>
-                    <a class="play-btn ${isDisabled ? 'disabled' : ''}" href="${game.url}" style="background-color: ${game.btnColor}">${game.btnText}</a>
+                    <a class="play-btn" href="${game.url}" style="background-color: ${game.btnColor}">${game.btnText}</a>
                 `;
                 container.appendChild(card);
             });

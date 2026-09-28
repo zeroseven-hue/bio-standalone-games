@@ -24,18 +24,5 @@
     "btnText": "🚀 直接進入遊戲",
     "btnColor": "#e74c3c",
     "url": "https://zeroseven-hue.github.io/boba-reaction-game/"
-  },
-  {
-    "id": "circulatory_preview",
-    "title": "心血管與血液循環大冒險",
-    "category": "circulatory",
-    "badgeText": "單元預告",
-    "badgeColor": "#0284c7",
-    "icon": "🫀",
-    "description": "探索心臟四腔室、體循環與肺循環路徑，包含血管氣體交換與血球功能專屬題庫！",
-    "tags": ["🩸 循環系統專屬題庫", "🫀 心臟剖面圖解", "⌛ 即將登場"],
-    "btnText": "⌛ 預計近期上線",
-    "btnColor": "#94a3b8",
-    "url": "#"
   }
 ]
