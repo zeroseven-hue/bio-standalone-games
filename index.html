@@ -527,10 +527,25 @@
                             <option value="projector">🖥️ 全班大螢幕投影主持</option>
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="selectQCount">3. 本次出題題數：</label>
+                        <div style="display: flex; gap: 8px;">
+                            <select id="selectQCount" class="styled-select" style="flex: 1;" onchange="onQCountSelectChange(this)">
+                                <option value="5">5 題 (快速隨堂複習)</option>
+                                <option value="10" selected>10 題 (標準課堂評量)</option>
+                                <option value="15">15 題 (進階課堂挑戰)</option>
+                                <option value="20">20 題 (完整綜合測驗)</option>
+                                <option value="25">25 題 (大考滿分挑戰)</option>
+                                <option value="custom">✏️ 自訂題數...</option>
+                            </select>
+                            <input type="number" id="inputCustomQCount" class="styled-input" value="10" min="1" max="100" style="width: 100px; display: none;" placeholder="題數">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group checkbox-group">
+                    <div class="form-group checkbox-group" style="margin-top: 4px;">
                         <label class="toggle-label">
                             <input type="checkbox" id="checkTimerOff">
                             <strong>🧩 特教友善模式 (`timer=off`)</strong>
@@ -670,14 +685,38 @@
         /* --- 教師派發 & QR Code 邏輯 --- */
         let qrcodeObj = null;
 
+        function onQCountSelectChange(sel) {
+            const inputCustom = document.getElementById('inputCustomQCount');
+            if (!inputCustom) return;
+            if (sel.value === 'custom') {
+                inputCustom.style.display = 'inline-block';
+                inputCustom.focus();
+            } else {
+                inputCustom.style.display = 'none';
+            }
+        }
+
+        function getSelectedQCount() {
+            const selectQCount = document.getElementById("selectQCount");
+            const inputCustom = document.getElementById("inputCustomQCount");
+            if (!selectQCount) return "10";
+            if (selectQCount.value === "custom") {
+                const val = parseInt(inputCustom ? inputCustom.value : "10", 10);
+                return (isNaN(val) || val <= 0) ? "10" : val.toString();
+            }
+            return selectQCount.value;
+        }
+
         function buildDispatchUrl() {
             const gameUrl = document.getElementById('selectGame').value;
             const mode = document.getElementById('selectMode').value;
             const isTimerOff = document.getElementById('checkTimerOff').checked;
+            const qcount = getSelectedQCount();
 
             let url = new URL(gameUrl);
             if (mode) url.searchParams.set('mode', mode);
             if (isTimerOff) url.searchParams.set('timer', 'off');
+            if (qcount) url.searchParams.set('qcount', qcount);
             return url.toString();
         }
 
