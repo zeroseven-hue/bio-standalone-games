@@ -1,4 +1,4 @@
-# 🕹️ 專案 02：獨立課堂遊戲大廳 (bio-standalone-games)
+﻿# 🕹️ 專案 02：獨立課堂遊戲大廳 (bio-standalone-games)
 
 本檔案為 **大廳二（bio-standalone-games）** 之權威專案身分證與架構設定檔。
 
@@ -7,7 +7,7 @@
 ## 📌 專案基本資料
 
 * **專案識別名稱**：`02_大廳二_獨立課堂遊戲大廳 (bio-standalone-games)`
-* **本機唯一路徑**：`D:\AI Agent\教學專案系統\02_大廳二_獨立課堂遊戲大廳 (bio-standalone-games)`
+* **本機唯一路徑**：`D:\antigravity\教學專案系統\02_大廳二_獨立課堂遊戲大廳 (bio-standalone-games)`
 * **GitHub 倉庫**：[`zeroseven-hue/bio-standalone-games`](https://github.com/zeroseven-hue/bio-standalone-games)
 * **GitHub Pages 線上站點**：[https://zeroseven-hue.github.io/bio-standalone-games/](https://zeroseven-hue.github.io/bio-standalone-games/)
 * **Git 主要分支**：`main`
