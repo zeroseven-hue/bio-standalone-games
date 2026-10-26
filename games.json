@@ -6,15 +6,15 @@
     "badgeText": "熱門登場",
     "badgeColor": "#27ae60",
     "icon": "💩",
-    "description": "54格地圖探索口腔、胃液、膽汁乳化與小腸絨毛吸收，內建 36 題消化系統專屬題庫，完成獲得防偽驗證碼！",
+    "description": "54格地圖探索口腔、胃液、膽汁乳化、小腸絨毛吸收與肛門排遺，內建三大教科書 60 題精選題庫、3D 骰子與小組遞減計分！",
     "tags": [
-      "🧬 消化系統專屬題庫",
-      "📊 GC 截圖繳交",
-      "📱 RWD響應式"
+      "🧬 消化系統 60 題權威題庫",
+      "🎲 3D 骰子與小組競速",
+      "📊 GC 截圖繳交"
     ],
     "btnText": "🚀 直接進入遊戲",
     "btnColor": "#27ae60",
-    "url": "https://zeroseven-hue.github.io/bio-digestive-game/?v=3.7"
+    "url": "https://zeroseven-hue.github.io/bio-digestive-game/?v=5.0"
   },
   {
     "id": "boba_reaction_game",
