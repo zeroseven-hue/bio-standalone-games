@@ -114,34 +114,40 @@
       return THEME_CONFIGS[window.BGS_THEME];
     }
 
-    const loc = (location.pathname || '') + ' ' + (location.href || '') + ' ' + (document.title || '') + ' ' + (options && options.gameTitle || '');
-    const low = loc.toLowerCase();
+    const path = (location.pathname || '').toLowerCase();
+    const href = (location.href || '').toLowerCase();
+    const title = (document.title || '').toLowerCase();
+    const gTitle = (options && options.gameTitle ? options.gameTitle : '').toLowerCase();
 
-    // 1. Pixel (Retro Arcade)
-    if (low.includes('mario') || low.includes('pacman') || low.includes('shaft') || 
-        loc.includes('瑪利歐') || loc.includes('小精靈') || loc.includes('下樓梯')) {
+    // 1. Pixel (復古像素街機風)
+    if (path.includes('/mario') || path.includes('/pacman') || path.includes('/shaft') ||
+        title.includes('瑪利歐') || title.includes('小精靈') || title.includes('下樓梯') ||
+        gTitle.includes('瑪利歐') || gTitle.includes('小精靈') || gTitle.includes('下樓梯')) {
       return THEME_CONFIGS.pixel;
     }
 
-    // 2. Nature (Cute Green)
-    if (low.includes('bean') || low.includes('farm') || low.includes('fishing') || low.includes('pvz') ||
-        loc.includes('淘氣豆') || loc.includes('農場') || loc.includes('釣魚') || loc.includes('植物大戰')) {
+    // 2. Nature (森林萌系大地風)
+    if (path.includes('/bean') || path.includes('/escape-farm') || path.includes('/fishing') || path.includes('/pvz') ||
+        title.includes('淘氣豆') || title.includes('農場') || title.includes('釣魚') || title.includes('植物大戰') ||
+        gTitle.includes('淘氣豆') || gTitle.includes('農場') || gTitle.includes('釣魚') || gTitle.includes('植物大戰')) {
       return THEME_CONFIGS.nature;
     }
 
-    // 3. Fantasy (Medieval RPG)
-    if (low.includes('rpg') || low.includes('castle') || low.includes('alice') || low.includes('school') ||
-        loc.includes('勇者') || loc.includes('古堡') || loc.includes('愛麗絲') || loc.includes('密室')) {
+    // 3. Fantasy (中古奇幻冒險風)
+    if (path.includes('/rpg') || path.includes('/escape-castle') || path.includes('/escape-alice') || path.includes('/escape-school') ||
+        title.includes('勇者') || title.includes('古堡') || title.includes('愛麗絲') || title.includes('密室') ||
+        gTitle.includes('勇者') || gTitle.includes('古堡') || gTitle.includes('愛麗絲') || gTitle.includes('密室')) {
       return THEME_CONFIGS.fantasy;
     }
 
-    // 4. Warm (Dining & Lab)
-    if (low.includes('digestive') || low.includes('kingdom') || low.includes('boba') ||
-        loc.includes('消化') || loc.includes('五界') || loc.includes('珍奶') || loc.includes('食堂')) {
+    // 4. Warm (暖心工坊食堂風)
+    if (path.includes('digestive') || path.includes('kingdom') || path.includes('boba') ||
+        title.includes('消化') || title.includes('五界') || title.includes('珍奶') || title.includes('珍珠奶茶') || title.includes('食堂') ||
+        gTitle.includes('消化') || gTitle.includes('五界') || gTitle.includes('珍奶') || gTitle.includes('珍珠奶茶') || gTitle.includes('食堂')) {
       return THEME_CONFIGS.warm;
     }
 
-    // 5. Default Sci-Fi
+    // 5. Default Sci-Fi (深空星艦科技風)
     return THEME_CONFIGS.scifi;
   }
 
