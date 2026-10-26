@@ -23,7 +23,7 @@
 | :---: | :--- | :--- | :--- | :--- |
 | 1 | 🫀 **《人體消化大冒險》** | [`bio-digestive-game`](https://github.com/zeroseven-hue/bio-digestive-game) | [即刻遊玩](https://zeroseven-hue.github.io/bio-digestive-game/) | 54 格消化系統大地圖、36 題專屬消化與酵素題庫、雙模運作 (線上Fetch + 離線備用題庫)。 |
 | 2 | 🧋 **《珍珠奶茶大對決》** | [`boba-reaction-game`](https://github.com/zeroseven-hue/boba-reaction-game) | [即刻遊玩](https://zeroseven-hue.github.io/boba-reaction-game/) | 毫秒級 (ms) 反應力 PK、大螢幕雙人對決、神經傳導與反射專屬題庫。 |
-| 3 | 🔬 **《五界研究所：微觀視野探險記》** | [`bio-five-kingdoms-game`](https://github.com/zeroseven-hue/bio-five-kingdoms-game) | [即刻遊玩](https://zeroseven-hue.github.io/bio-five-kingdoms-game/) | 36 種珍稀生物分類特徵檢索表、圖鑑收集模式、原核/原生/真菌/植物/動物五界專屬題庫。 |
+| 3 | 🔬 **《五界生物研究餐廳》** | [`bio-five-kingdoms-game`](https://github.com/zeroseven-hue/bio-five-kingdoms-game) | [即刻遊玩](https://zeroseven-hue.github.io/bio-five-kingdoms-game/) | 48種生物插畫、36張原題庫委託、四主題九張研究、迴轉餐桌、圖鑑收藏、裝飾與離線續玩。 |
 
 ---
 
