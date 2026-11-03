@@ -118,6 +118,11 @@
         .hall-header {
             margin-top: 20px;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .hall-title {
@@ -128,6 +133,38 @@
             align-items: center;
             gap: 8px;
             margin: 0;
+        }
+
+        .cat-dashboard-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            border: 2px solid #d97706;
+            background: #d97706;
+            color: #ffffff !important;
+            font-size: 0.98rem;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            touch-action: manipulation;
+            min-height: 44px;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+        }
+
+        .cat-dashboard-link:hover {
+            background: #b45309;
+            border-color: #b45309;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(217, 119, 6, 0.45);
+            color: #ffffff !important;
+        }
+
+        .cat-dashboard-link:active {
+            transform: translateY(0);
         }
 
         /* 卡片網格 Layout */
@@ -498,6 +535,9 @@
         <!-- 遊戲大廳區塊 -->
         <section class="hall-header">
             <h2 class="hall-title">🎮 獨立題庫專屬遊戲大廳 (單元主題·自訂題庫)</h2>
+            <a href="https://script.google.com/macros/s/AKfycbwg2Vk35T_csNNiyh7cQIAxY1h23wl-5xWE9VyxNMTF/dev" target="_blank" class="cat-dashboard-link" title="在新分頁開啟即時成績儀表板">
+                📊 成績儀表板 ↗
+            </a>
         </section>
 
         <!-- 卡片網格 Container -->
