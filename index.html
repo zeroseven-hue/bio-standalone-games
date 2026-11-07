@@ -530,7 +530,8 @@
                 <a class="action-btn switch-btn" href="https://zeroseven-hue.github.io/bio-games/">👉 切換至【共用題庫遊戲大廳】</a>
                 <button class="action-btn" onclick="openTimerModal()">⏱️ 課堂專注計時器</button>
             </div>
-        </header>
+          <div style="text-align:right; padding:6px 16px;"><button id="btnTeacherPinLock" style="background:#1e293b; color:#f8fafc; border:1px solid #475569; padding:6px 14px; border-radius:6px; font-weight:700; cursor:pointer;" onclick="toggleTeacherPinLock()">🔒 教師管理鎖</button></div>
+</header>
 
         <!-- 遊戲大廳區塊 -->
         <section class="hall-header">
@@ -860,5 +861,17 @@
 
         loadGames();
     </script>
+
+<script>
+function toggleTeacherPinLock() {
+    const cur = localStorage.getItem('teacher_global_pin') || '8088';
+    const pwd = prompt('🔒 請輸入教師管理解鎖密碼：');
+    if (pwd === cur) {
+        alert('✅ 密碼正確，已解鎖教師管理功能！');
+    } else if (pwd !== null) {
+        alert('❌ 密碼錯誤！');
+    }
+}
+</script>
 </body>
 </html>
