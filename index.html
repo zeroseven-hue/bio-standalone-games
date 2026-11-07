@@ -513,6 +513,97 @@
             font-size: 13px;
         }
     </style>
+<style>
+/* 🔒 教師安全防護 PIN 密碼鎖樣式 */
+.pin-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.96) !important;
+  backdrop-filter: blur(16px);
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999 !important;
+}
+.pin-modal-overlay.hidden {
+  display: none !important;
+}
+.pin-modal-card {
+  background: #1e293b;
+  border: 2px solid #38bdf8;
+  border-radius: 24px;
+  padding: 36px 28px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  animation: pinPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes pinPopIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+.pin-icon {
+  font-size: 3.2rem;
+  margin-bottom: 12px;
+}
+.pin-modal-card h2 {
+  font-size: 1.5rem;
+  color: #f8fafc;
+  margin: 0 0 10px 0;
+  font-weight: 800;
+}
+.pin-modal-card p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.pin-modal-card input {
+  width: 82%;
+  padding: 12px;
+  font-size: 1.6rem;
+  text-align: center;
+  letter-spacing: 6px;
+  background: #0f172a;
+  border: 2px solid #334155;
+  border-radius: 12px;
+  color: #38bdf8;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.pin-modal-card input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}
+.pin-error-text {
+  color: #f87171;
+  font-size: 0.9rem;
+  font-weight: 700;
+  min-height: 22px;
+  margin-bottom: 14px;
+}
+.btn-pin-submit {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.btn-pin-submit:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+.btn-pin-submit:active {
+  transform: translateY(0);
+}
+</style>
 </head>
 <body>
 
@@ -872,6 +963,88 @@ function toggleTeacherPinLock() {
         alert('❌ 密碼錯誤！');
     }
 }
+</script>
+
+  <!-- 🔒 教師安全防護 PIN 密碼解鎖 Modal -->
+  <div id="pinLockModal" class="pin-modal-overlay">
+    <div class="pin-modal-card">
+      <div class="pin-icon">🔒</div>
+      <h2>獨立課堂遊戲大廳 安全鎖</h2>
+      <p>本大廳為獨立主題課堂遊戲，請輸入教師管理密碼解鎖進入：</p>
+      <input type="password" id="pinInput" placeholder="請輸入密碼" maxlength="10" autocomplete="off">
+      <div id="pinErrorMsg" class="pin-error-text"></div>
+      <button id="btnSubmitPin" class="btn-pin-submit">🔓 解鎖進入大廳</button>
+    </div>
+  </div>
+
+<script>
+// ==================== 🔒 教師安全驗證門禁系統 (預設8088，無洩漏) ====================
+(function initGlobalHallGatekeeper() {
+  const SESSION_AUTH_KEY = 'bio_teacher_auth_passed';
+  const PIN_KEY = 'teacher_global_pin';
+  const DEFAULT_PIN = '8088';
+
+  function isAuthed() {
+    return sessionStorage.getItem(SESSION_AUTH_KEY) === 'true';
+  }
+
+  function setAuthed() {
+    sessionStorage.setItem(SESSION_AUTH_KEY, 'true');
+  }
+
+  function setup() {
+    const modal = document.getElementById('pinLockModal');
+    const pinInput = document.getElementById('pinInput');
+    const btnSubmit = document.getElementById('btnSubmitPin');
+    const errMsg = document.getElementById('pinErrorMsg');
+
+    if (!modal) return;
+
+    if (isAuthed()) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      return;
+    }
+
+    // 未驗證：強制鎖定畫面
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    if (pinInput) setTimeout(() => pinInput.focus(), 200);
+
+    function verifyPin() {
+      const entered = (pinInput ? pinInput.value.trim() : '');
+      const validPin = localStorage.getItem(PIN_KEY) || localStorage.getItem('bio_classroom_teacher_pin') || DEFAULT_PIN;
+      if (entered === validPin) {
+        setAuthed();
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        if (pinInput) pinInput.value = '';
+        if (errMsg) errMsg.textContent = '';
+      } else {
+        if (errMsg) errMsg.textContent = '❌ 密碼不正確，請重新輸入！';
+        if (pinInput) {
+          pinInput.value = '';
+          pinInput.focus();
+        }
+      }
+    }
+
+    if (btnSubmit) {
+      btnSubmit.onclick = verifyPin;
+    }
+    if (pinInput) {
+      pinInput.onkeydown = (e) => {
+        if (e.key === 'Enter') verifyPin();
+      };
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setup);
+  } else {
+    setup();
+  }
+})();
 </script>
 </body>
 </html>
