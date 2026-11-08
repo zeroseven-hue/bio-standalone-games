@@ -650,12 +650,12 @@
                 專屬單元獨立題庫 · 深度主題闖關遊戲 · 支援 iPad 觸控與 Google Classroom 作業繳交
             </div>
             <div class="top-actions">
+                <button id="btnTeacherPinLock" class="action-btn" style="background: #1e293b; color: #f8fafc; border: 1.5px solid #475569;" onclick="toggleTeacherPinLock()">🔒 教師管理鎖</button>
                 <a class="action-btn switch-btn" href="https://zeroseven-hue.github.io/bio-games/">👉 切換至【共用題庫遊戲大廳】</a>
                 <button class="action-btn" onclick="openTimerModal()">⏱️ 課堂專注計時器</button>
                 <button id="themeToggleBtn" class="action-btn" style="background: var(--card-bg); color: var(--text-dark); border: 1.5px solid var(--card-border);" onclick="toggleColorTheme()">🌓 切換模式</button>
             </div>
-          <div style="text-align:right; padding:6px 16px;"><button id="btnTeacherPinLock" style="background:#1e293b; color:#f8fafc; border:1px solid #475569; padding:6px 14px; border-radius:6px; font-weight:700; cursor:pointer;" onclick="toggleTeacherPinLock()">🔒 教師管理鎖</button></div>
-</header>
+          </header>
 
         <!-- 遊戲大廳區塊 -->
         <section class="hall-header">
@@ -739,10 +739,7 @@
             </div>
         </section>
 
-        <footer>
-            © 2026 國中生物獨立單元遊戲大廳 bio-standalone-games · 專為國中 7-8 年級生物教學打造
-        </footer>
-    </div>
+        </div>
 
     <!-- 課堂計時器 Modal -->
     <div class="modal" id="timer-modal">
@@ -1103,8 +1100,9 @@ function toggleTeacherPinLock() {
 })();
 </script>
 
-<!-- 版權與研發宣告頁尾 -->
-<footer class="platform-copyright-footer" style="margin-top: 50px; padding: 26px 16px; text-align: center; color: var(--text-muted, #64748b); font-size: 0.88rem; border-top: 1px dashed rgba(100, 116, 139, 0.25); line-height: 1.8;">
+
+<!-- 全站統一版權與研發宣告頁尾 -->
+<footer class="platform-copyright-footer" style="margin-top: 50px; padding: 26px 16px; text-align: center; color: var(--text-muted, var(--text-sub, #64748b)); font-size: 0.88rem; border-top: 1px dashed rgba(100, 116, 139, 0.25); line-height: 1.8;">
   <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 3px;">🧬 國中生物課堂數位互動教學平台</div>
   <div>研發設計：<b>零柒老師 Selin</b></div>
   <div style="font-size: 0.78rem; opacity: 0.85; margin-top: 4px;">
