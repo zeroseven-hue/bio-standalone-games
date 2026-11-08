@@ -8,43 +8,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root, [data-theme="light"] {
-            --primary: #db2777;
-            --primary-hover: #be185d;
-            --primary-light: #fdf2f8;
-            --primary-border: #fbcfe8;
-            --bg-color: #fff1f2;
+            --primary: #7c3aed;
+            --primary-hover: #6d28d9;
+            --primary-light: #f5f3ff;
+            --primary-border: #ddd6fe;
+            --bg-color: #faf5ff;
             --card-bg: #ffffff;
-            --card-border: #fecdd3;
-            --text-dark: #881337;
-            --text-muted: #9f1239;
+            --card-border: #e9d5ff;
+            --text-dark: #4c1d95;
+            --text-muted: #6d28d9;
             --accent-blue: #0284c7;
             --accent-purple: #7c3aed;
-            --header-title-color: #9d174d;
-            --badge-bg: #fce7f3;
-            --badge-text: #be185d;
-            --badge-border: #f472b6;
-            --btn-shadow: rgba(219, 39, 119, 0.25);
-            --btn-shadow-hover: rgba(219, 39, 119, 0.35);
+            --header-title-color: #5b21b6;
+            --badge-bg: #ede9fe;
+            --badge-text: #6d28d9;
+            --badge-border: #c4b5fd;
+            --btn-shadow: rgba(124, 58, 237, 0.25);
+            --btn-shadow-hover: rgba(124, 58, 237, 0.35);
         }
 
         [data-theme="dark"] {
-            --primary: #f472b6;
-            --primary-hover: #ec4899;
-            --primary-light: rgba(244, 114, 182, 0.15);
-            --primary-border: rgba(244, 114, 182, 0.3);
-            --bg-color: #160b13;
-            --card-bg: #23121e;
-            --card-border: rgba(244, 114, 182, 0.22);
-            --text-dark: #fdf2f8;
-            --text-muted: #fbcfe8;
+            --primary: #a78bfa;
+            --primary-hover: #8b5cf6;
+            --primary-light: rgba(167, 139, 250, 0.15);
+            --primary-border: rgba(167, 139, 250, 0.3);
+            --bg-color: #0f0728;
+            --card-bg: #1e1145;
+            --card-border: rgba(167, 139, 250, 0.22);
+            --text-dark: #f5f3ff;
+            --text-muted: #ddd6fe;
             --accent-blue: #38bdf8;
             --accent-purple: #c084fc;
-            --header-title-color: #fbcfe8;
-            --badge-bg: rgba(244, 114, 182, 0.18);
-            --badge-text: #f472b6;
-            --badge-border: #ec4899;
+            --header-title-color: #ddd6fe;
+            --badge-bg: rgba(167, 139, 250, 0.18);
+            --badge-text: #a78bfa;
+            --badge-border: #8b5cf6;
             --btn-shadow: rgba(0, 0, 0, 0.5);
-            --btn-shadow-hover: rgba(244, 114, 182, 0.4);
+            --btn-shadow-hover: rgba(167, 139, 250, 0.4);
         }
 
         * { box-sizing: border-box; }
@@ -171,8 +171,8 @@
             gap: 8px;
             padding: 10px 20px;
             border-radius: 9999px;
-            border: 2px solid #db2777;
-            background: #db2777;
+            border: 2px solid #7c3aed;
+            background: #7c3aed;
             color: #ffffff !important;
             font-size: 0.98rem;
             font-weight: 800;
@@ -182,14 +182,14 @@
             user-select: none;
             touch-action: manipulation;
             min-height: 44px;
-            box-shadow: 0 4px 12px rgba(219, 39, 119, 0.35);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
         }
 
         .cat-dashboard-link:hover {
-            background: #be185d;
-            border-color: #be185d;
+            background: #6d28d9;
+            border-color: #6d28d9;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(219, 39, 119, 0.45);
+            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.45);
             color: #ffffff !important;
         }
 
@@ -582,8 +582,8 @@
     }
     .hall-chip-1:hover { border-color: #16a34a; color: #16a34a; box-shadow: 0 4px 14px rgba(22,163,74,0.25); }
     .hall-chip-1.active { background: #16a34a !important; color: #ffffff !important; border-color: #15803d !important; box-shadow: 0 4px 14px rgba(22,163,74,0.4) !important; }
-    .hall-chip-2:hover { border-color: #db2777; color: #db2777; box-shadow: 0 4px 14px rgba(219,39,119,0.25); }
-    .hall-chip-2.active { background: #db2777 !important; color: #ffffff !important; border-color: #be185d !important; box-shadow: 0 4px 14px rgba(219,39,119,0.4) !important; }
+    .hall-chip-2:hover { border-color: #7c3aed; color: #7c3aed; box-shadow: 0 4px 14px rgba(124,58,237,0.25); }
+    .hall-chip-2.active { background: #7c3aed !important; color: #ffffff !important; border-color: #6d28d9 !important; box-shadow: 0 4px 14px rgba(124,58,237,0.4) !important; }
     .hall-chip-3:hover { border-color: #2563eb; color: #2563eb; box-shadow: 0 4px 14px rgba(37,99,235,0.25); }
     .hall-chip-3.active { background: #2563eb !important; color: #ffffff !important; border-color: #1d4ed8 !important; box-shadow: 0 4px 14px rgba(37,99,235,0.4) !important; }
     .hall-chip-4:hover { border-color: #dc2626; color: #dc2626; box-shadow: 0 4px 14px rgba(220,38,38,0.25); }
@@ -692,7 +692,7 @@
                 <header class="hero" style="position:relative; padding:26px 20px 20px; border-radius:20px; background:var(--card-bg); border:1.5px solid var(--card-border); margin-bottom:24px; box-shadow:0 8px 24px rgba(0,0,0,0.06);">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
               <div style="flex:1; min-width:280px; text-align:left;">
-                <div class="hall-tag" style="display:inline-block; background:rgba(219,39,119,0.15); color:#db2777; border:1px solid rgba(219,39,119,0.3); padding:4px 12px; border-radius:20px; font-size:0.85rem; font-weight:700; margin-bottom:8px;">🏛️ 大廳二 ‧ 獨立課堂遊戲專區</div>
+                <div class="hall-tag" style="display:inline-block; background:rgba(124,58,237,0.15); color:#7c3aed; border:1px solid rgba(124,58,237,0.3); padding:4px 12px; border-radius:20px; font-size:0.85rem; font-weight:700; margin-bottom:8px;">🏛️ 大廳二 ‧ 獨立課堂遊戲專區</div>
                 <h1 class="hero-title" style="margin:0 0 6px 0; font-size:1.85rem; display:flex; align-items:center; gap:8px; flex-wrap:wrap; color:var(--text-dark);">
                     <span>🧬 國中生物獨立單元遊戲大廳</span>
                     <span class="badge-code" style="font-size:1.05rem; padding:2px 8px; border-radius:6px;">bio-standalone-games</span>
