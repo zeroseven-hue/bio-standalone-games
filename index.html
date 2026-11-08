@@ -7,15 +7,44 @@
     <!-- QRCode.js CDN for QR Code Generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        :root {
-            --primary: #059669;
-            --primary-hover: #047857;
-            --bg-color: #f0fdf4;
+        :root, [data-theme="light"] {
+            --primary: #db2777;
+            --primary-hover: #be185d;
+            --primary-light: #fdf2f8;
+            --primary-border: #fbcfe8;
+            --bg-color: #fff1f2;
             --card-bg: #ffffff;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
+            --card-border: #fecdd3;
+            --text-dark: #881337;
+            --text-muted: #9f1239;
             --accent-blue: #0284c7;
             --accent-purple: #7c3aed;
+            --header-title-color: #9d174d;
+            --badge-bg: #fce7f3;
+            --badge-text: #be185d;
+            --badge-border: #f472b6;
+            --btn-shadow: rgba(219, 39, 119, 0.25);
+            --btn-shadow-hover: rgba(219, 39, 119, 0.35);
+        }
+
+        [data-theme="dark"] {
+            --primary: #f472b6;
+            --primary-hover: #ec4899;
+            --primary-light: rgba(244, 114, 182, 0.15);
+            --primary-border: rgba(244, 114, 182, 0.3);
+            --bg-color: #160b13;
+            --card-bg: #23121e;
+            --card-border: rgba(244, 114, 182, 0.22);
+            --text-dark: #fdf2f8;
+            --text-muted: #fbcfe8;
+            --accent-blue: #38bdf8;
+            --accent-purple: #c084fc;
+            --header-title-color: #fbcfe8;
+            --badge-bg: rgba(244, 114, 182, 0.18);
+            --badge-text: #f472b6;
+            --badge-border: #ec4899;
+            --btn-shadow: rgba(0, 0, 0, 0.5);
+            --btn-shadow-hover: rgba(244, 114, 182, 0.4);
         }
 
         * { box-sizing: border-box; }
@@ -46,7 +75,7 @@
         .hero-title {
             font-size: 28px;
             font-weight: 800;
-            color: #065f46;
+            color: var(--header-title-color);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -56,13 +85,13 @@
         }
 
         .badge-code {
-            background: #d1fae5;
-            color: #047857;
+            background: var(--badge-bg);
+            color: var(--badge-text);
             font-family: monospace;
             font-size: 18px;
             padding: 2px 10px;
             border-radius: 8px;
-            border: 1px solid #6ee7b7;
+            border: 1px solid var(--badge-border);
         }
 
         .hero-subtitle {
@@ -91,7 +120,7 @@
             font-weight: 700;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+            box-shadow: 0 4px 12px var(--btn-shadow);
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
@@ -101,7 +130,8 @@
 
         .action-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.35);
+            background: var(--primary-hover);
+            box-shadow: 0 6px 16px var(--btn-shadow-hover);
         }
 
         .switch-btn {
@@ -181,16 +211,17 @@
             border-radius: 20px;
             padding: 24px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e2e8f0;
+            border: 1.5px solid var(--card-border);
             display: flex;
             flex-direction: column;
             position: relative;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
         .game-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 14px 30px rgba(219, 39, 119, 0.12);
+            border-color: var(--primary);
         }
 
         .card-badge {
@@ -235,13 +266,13 @@
         }
 
         .tag-pill {
-            background: #ecfdf5;
-            color: #047857;
+            background: var(--primary-light);
+            color: var(--primary);
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             padding: 4px 9px;
             border-radius: 8px;
-            border: 1px solid #a7f3d0;
+            border: 1px solid var(--primary-border);
             display: flex;
             align-items: center;
             gap: 4px;
@@ -271,11 +302,11 @@
         /* 👨‍🏫 教師派發面板樣式 */
         .dispatch-section {
             margin-top: 40px;
-            background: white;
+            background: var(--card-bg);
             border-radius: 20px;
             padding: 24px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e2e8f0;
+            border: 1.5px solid var(--card-border);
         }
 
         .dispatch-title {
@@ -362,12 +393,13 @@
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+            box-shadow: 0 4px 12px var(--btn-shadow);
         }
 
         .btn-dispatch:hover {
             background: var(--primary-hover);
             transform: translateY(-2px);
+            box-shadow: 0 6px 16px var(--btn-shadow-hover);
         }
 
         .btn-secondary {
@@ -382,8 +414,8 @@
         .qr-result-area {
             margin-top: 24px;
             padding: 20px;
-            background: #f0fdf4;
-            border: 1.5px dashed #6ee7b7;
+            background: var(--primary-light);
+            border: 1.5px dashed var(--primary-border);
             border-radius: 16px;
             display: flex;
             gap: 24px;
@@ -620,6 +652,7 @@
             <div class="top-actions">
                 <a class="action-btn switch-btn" href="https://zeroseven-hue.github.io/bio-games/">👉 切換至【共用題庫遊戲大廳】</a>
                 <button class="action-btn" onclick="openTimerModal()">⏱️ 課堂專注計時器</button>
+                <button id="themeToggleBtn" class="action-btn" style="background: var(--card-bg); color: var(--text-dark); border: 1.5px solid var(--card-border);" onclick="toggleColorTheme()">🌓 切換模式</button>
             </div>
           <div style="text-align:right; padding:6px 16px;"><button id="btnTeacherPinLock" style="background:#1e293b; color:#f8fafc; border:1px solid #475569; padding:6px 14px; border-radius:6px; font-weight:700; cursor:pointer;" onclick="toggleTeacherPinLock()">🔒 教師管理鎖</button></div>
 </header>
@@ -950,6 +983,29 @@
         function openTimerModal() { document.getElementById('timer-modal').style.display = 'flex'; }
         function closeTimerModal() { document.getElementById('timer-modal').style.display = 'none'; }
 
+        /* --- ☀️ 明亮 / 🌙 暗黑 主題切換邏輯 --- */
+        function initTheme() {
+            const savedTheme = localStorage.getItem('bio_hall_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeButtonText(savedTheme);
+        }
+
+        function toggleColorTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+            const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('bio_hall_theme', nextTheme);
+            updateThemeButtonText(nextTheme);
+        }
+
+        function updateThemeButtonText(theme) {
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) {
+                btn.innerHTML = theme === 'dark' ? '☀️ 明亮模式' : '🌙 暗黑模式';
+            }
+        }
+
+        initTheme();
         loadGames();
     </script>
 
