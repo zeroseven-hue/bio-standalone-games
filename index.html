@@ -544,7 +544,55 @@
             color: var(--text-muted);
             font-size: 13px;
         }
-    </style>
+    
+    /* 🌟 全大廳統一 1~5 導覽列規格 */
+    .unified-hall-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(100, 116, 139, 0.25);
+    }
+    .nav-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      background: var(--card-bg, #ffffff);
+      color: var(--text-dark, #334155);
+      border: 1.5px solid var(--card-border, #cbd5e1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+      white-space: nowrap;
+    }
+    .nav-chip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .nav-chip:active {
+      transform: translateY(1px) scale(0.97);
+    }
+    .hall-chip-1:hover { border-color: #16a34a; color: #16a34a; box-shadow: 0 4px 14px rgba(22,163,74,0.25); }
+    .hall-chip-1.active { background: #16a34a !important; color: #ffffff !important; border-color: #15803d !important; box-shadow: 0 4px 14px rgba(22,163,74,0.4) !important; }
+    .hall-chip-2:hover { border-color: #db2777; color: #db2777; box-shadow: 0 4px 14px rgba(219,39,119,0.25); }
+    .hall-chip-2.active { background: #db2777 !important; color: #ffffff !important; border-color: #be185d !important; box-shadow: 0 4px 14px rgba(219,39,119,0.4) !important; }
+    .hall-chip-3:hover { border-color: #2563eb; color: #2563eb; box-shadow: 0 4px 14px rgba(37,99,235,0.25); }
+    .hall-chip-3.active { background: #2563eb !important; color: #ffffff !important; border-color: #1d4ed8 !important; box-shadow: 0 4px 14px rgba(37,99,235,0.4) !important; }
+    .hall-chip-4:hover { border-color: #dc2626; color: #dc2626; box-shadow: 0 4px 14px rgba(220,38,38,0.25); }
+    .hall-chip-4.active { background: #dc2626 !important; color: #ffffff !important; border-color: #b91c1c !important; box-shadow: 0 4px 14px rgba(220,38,38,0.4) !important; }
+    .hall-chip-5:hover { border-color: #f59e0b; color: #f59e0b; box-shadow: 0 4px 14px rgba(245,158,11,0.25); }
+    .hall-chip-5.active { background: #f59e0b !important; color: #ffffff !important; border-color: #d97706 !important; box-shadow: 0 4px 14px rgba(245,158,11,0.4) !important; }
+    .hall-chip-timer:hover { border-color: #0284c7; color: #0284c7; box-shadow: 0 4px 14px rgba(2,132,199,0.25); }
+    
+</style>
 <style>
 /* 🔒 教師安全防護 PIN 密碼鎖樣式 */
 .pin-modal-overlay {
@@ -641,21 +689,46 @@
 
     <div class="container">
         <!-- 平台 Header -->
-        <header class="hero">
-            <h1 class="hero-title">
-                <span>🧬 國中生物獨立單元遊戲大廳</span>
-                <span class="badge-code">bio-standalone-games</span>
-            </h1>
-            <div class="hero-subtitle">
-                專屬單元獨立題庫 · 深度主題闖關遊戲 · 支援 iPad 觸控與 Google Classroom 作業繳交
+                <header class="hero" style="position:relative; padding:26px 20px 20px; border-radius:20px; background:var(--card-bg); border:1.5px solid var(--card-border); margin-bottom:24px; box-shadow:0 8px 24px rgba(0,0,0,0.06);">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+              <div style="flex:1; min-width:280px; text-align:left;">
+                <div class="hall-tag" style="display:inline-block; background:rgba(219,39,119,0.15); color:#db2777; border:1px solid rgba(219,39,119,0.3); padding:4px 12px; border-radius:20px; font-size:0.85rem; font-weight:700; margin-bottom:8px;">🏛️ 大廳二 ‧ 獨立課堂遊戲專區</div>
+                <h1 class="hero-title" style="margin:0 0 6px 0; font-size:1.85rem; display:flex; align-items:center; gap:8px; flex-wrap:wrap; color:var(--text-dark);">
+                    <span>🧬 國中生物獨立單元遊戲大廳</span>
+                    <span class="badge-code" style="font-size:1.05rem; padding:2px 8px; border-radius:6px;">bio-standalone-games</span>
+                </h1>
+                <div class="hero-subtitle" style="margin:0; text-align:left; font-size:0.92rem; color:var(--text-muted);">
+                    專屬單元獨立題庫 · 深度主題闖關遊戲 · 支援 iPad 觸控與 Google Classroom 作業繳交
+                </div>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <button id="themeToggleBtn" class="top-util-btn" style="background:var(--card-bg); color:var(--text-dark); border:1.5px solid var(--card-border); padding:7px 14px; border-radius:20px; font-weight:700; cursor:pointer; font-size:0.85rem; box-shadow:0 2px 6px rgba(0,0,0,0.06); transition:all 0.2s;" onclick="toggleColorTheme()">🌙 暗黑模式</button>
+                <button id="btnTeacherPinLock" class="top-util-btn" style="background:#1e293b; color:#f8fafc; border:1.5px solid #475569; padding:7px 16px; border-radius:20px; font-weight:700; cursor:pointer; font-size:0.85rem; box-shadow:0 2px 6px rgba(0,0,0,0.15); transition:all 0.2s;" onclick="toggleTeacherPinLock()">🔒 教師管理鎖</button>
+              </div>
             </div>
-            <div class="top-actions">
-                <button id="btnTeacherPinLock" class="action-btn" style="background: #1e293b; color: #f8fafc; border: 1.5px solid #475569;" onclick="toggleTeacherPinLock()">🔒 教師管理鎖</button>
-                <a class="action-btn switch-btn" href="https://zeroseven-hue.github.io/bio-games/">👉 切換至【共用題庫遊戲大廳】</a>
-                <button class="action-btn" onclick="openTimerModal()">⏱️ 課堂專注計時器</button>
-                <button id="themeToggleBtn" class="action-btn" style="background: var(--card-bg); color: var(--text-dark); border: 1.5px solid var(--card-border);" onclick="toggleColorTheme()">🌓 切換模式</button>
-            </div>
-          </header>
+
+            <!-- 全大廳統一 1~5 號導覽列 -->
+            <nav class="unified-hall-nav">
+              <a href="https://zeroseven-hue.github.io/bio-games/" class="nav-chip hall-chip-1">
+                <span>🎮</span> 大廳一：共用題庫遊戲
+              </a>
+              <a href="index.html" class="nav-chip hall-chip-2 active">
+                <span>🧩</span> 大廳二：獨立單元遊戲
+              </a>
+              <a href="https://zeroseven-hue.github.io/bio-tools/" class="nav-chip hall-chip-3">
+                <span>🛠️</span> 大廳三：課堂教學工具
+              </a>
+              <a href="https://zeroseven-hue.github.io/bio-classroom/" class="nav-chip hall-chip-4">
+                <span>🏫</span> 大廳四：班級經營神器
+              </a>
+              <a href="https://zeroseven-hue.github.io/bio-dashboard/" class="nav-chip hall-chip-5">
+                <span>📊</span> 大廳五：課堂評量神器
+              </a>
+              <button class="nav-chip hall-chip-timer" onclick="openTimerModal()" style="cursor:pointer; border:1.5px solid #cbd5e1; font-family:inherit;">
+                <span>⏱️</span> 專注計時器
+              </button>
+            </nav>
+        </header>
 
         <!-- 遊戲大廳區塊 -->
         <section class="hall-header">
